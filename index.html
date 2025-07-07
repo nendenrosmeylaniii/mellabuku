@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulasi Transaksi Toko Buku - Tema Pink</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #ffe6f0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff0f5;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      color: #d63384;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #b03060;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ffb6c1;
+      border-radius: 8px;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #ff69b4;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #ffe0ec;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #b03060;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Simulasi Transaksi Toko Buku</h2>
+    <h2>NENDEN ROSMEYLANI</h2>
+
+    <div class="form-group">
+      <label for="buku">Pilih Buku Pemrograman:</label>
+      <select id="buku">
+        <option value="75000">1. JavaScript Dasar - Rp75.000</option>
+        <option value="85000">2. Python untuk Pemula - Rp85.000</option>
+        <option value="95000">3. Panduan PHP & MySQL - Rp95.000</option>
+        <option value="105000">4. Mastering Java - Rp105.000</option>
+        <option value="99000">5. Web Development Fullstack - Rp99.000</option>
+        <option value="89000">6. Struktur Data dengan C++ - Rp89.000</option>
+        <option value="79000">7. Pemrograman Go Lang - Rp79.000</option>
+        <option value="115000">8. Algoritma & Pemrograman - Rp115.000</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="jumlah">Jumlah Pembelian:</label>
+      <input type="number" id="jumlah" min="1" placeholder="Masukkan jumlah buku"/>
+    </div>
+
+    <button onclick="hitungTotal()">Hitung Total</button>
+
+    <div class="result" id="hasil"></div>
+  </div>
+
+  <script>
+    function hitungTotal() {
+      const harga = parseFloat(document.getElementById("buku").value);
+      const jumlah = parseInt(document.getElementById("jumlah").value);
+      const hasil = document.getElementById("hasil");
+
+      if (isNaN(jumlah) || jumlah < 1) {
+        hasil.innerHTML = "Silakan masukkan jumlah pembelian yang valid.";
+        return;
+      }
+
+      let total = harga * jumlah;
+      let diskon = 0;
+
+      if (jumlah > 3) {
+        diskon = total * 0.10;
+        total -= diskon;
+      }
+
+      hasil.innerHTML = `
+        Total Harga: Rp${(harga * jumlah).toLocaleString()}<br>
+        ${diskon > 0 ? `Diskon 10%: -Rp${diskon.toLocaleString()}<br>` : ''}
+        <strong>Total Bayar: Rp${total.toLocaleString()}</strong>
+      `;
+    }
+  </script>
+</body>
+</html>
